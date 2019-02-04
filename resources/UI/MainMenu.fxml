@@ -92,7 +92,7 @@
             <Separator orientation="VERTICAL" prefHeight="542.0" prefWidth="3.0" />
             <AnchorPane prefHeight="532.0" prefWidth="400.0">
                <children>
-                  <VBox prefHeight="542.0" prefWidth="410.0">
+                  <VBox fx:id="newRecipe" prefHeight="542.0" prefWidth="410.0">
                      <children>
                         <Label prefHeight="43.0" prefWidth="170.0" text="Create Recipe">
                            <font>
@@ -128,7 +128,7 @@
                         </TableView>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Create" />
+                              <Button mnemonicParsing="false" onAction="#initiateRecipes" text="Create" />
                               <Button mnemonicParsing="false" text="Back" />
                            </children>
                         </HBox>

@@ -14,4 +14,8 @@ public class MainMenuController {
 
     }
 
+    public void initiateRecipes(){
+
+    }
+
 }
