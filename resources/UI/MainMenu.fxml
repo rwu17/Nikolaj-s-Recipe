@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainMenuController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainMenuController">
    <children>
       <HBox alignment="CENTER_LEFT" maxHeight="150.0" prefHeight="70.0" prefWidth="800.0">
          <padding>
@@ -77,7 +77,7 @@
                               <Insets left="10.0" top="90.0" />
                            </padding>
                         </Label>
-                        <ImageView fx:id="newRecipe" fitHeight="110.0" fitWidth="95.0" onMouseClicked="#blendImage" onMousePressed="#recipeCreateMenu" pickOnBounds="true" preserveRatio="true" styleClass="image-blue">
+                        <ImageView fx:id="recipeNew" fitHeight="110.0" fitWidth="95.0" onMouseExited="#removeEffect" onMouseMoved="#blendImage" onMousePressed="#recipeCreateMenu" pickOnBounds="true" preserveRatio="true" styleClass="image-blue">
                            <image>
                               <Image url="@../images/newRecipe.png" />
                            </image>
@@ -92,7 +92,7 @@
             <Separator orientation="VERTICAL" prefHeight="542.0" prefWidth="3.0" />
             <AnchorPane prefHeight="532.0" prefWidth="400.0">
                <children>
-                  <VBox prefHeight="542.0" prefWidth="410.0">
+                  <VBox fx:id="recipeCreation" prefHeight="542.0" prefWidth="410.0" visible="false">
                      <children>
                         <Label prefHeight="43.0" prefWidth="170.0" text="Create Recipe">
                            <font>
@@ -129,7 +129,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Button mnemonicParsing="false" text="Create" />
-                              <Button mnemonicParsing="false" text="Back" />
+                              <Button fx:id="toMainMenu" mnemonicParsing="false" onAction="#backToMain" text="Back" />
                            </children>
                         </HBox>
                      </children></VBox>
