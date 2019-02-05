@@ -48,4 +48,8 @@ public class MainMenuController {
         recipeCreation.setVisible(false);
     }
 
+    public void initiateRecipes(){
+
+    }
+
 }

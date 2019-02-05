@@ -25,8 +25,4 @@ public class Recipe {
             recipe.items.remove(item);
         }
     }
-
-    static void initiateRecipes(){
-
-    }
 }
