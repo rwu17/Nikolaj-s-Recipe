@@ -101,12 +101,12 @@
             <Separator orientation="VERTICAL" prefHeight="532.0" prefWidth="3.0" />
             <VBox fx:id="recipeCreation" prefHeight="542.0" prefWidth="410.0">
                <children>
-                  <Label prefHeight="43.0" prefWidth="170.0" text="Create Recipe">
+                  <Label prefHeight="21.0" prefWidth="170.0" text="Create Recipe" VBox.vgrow="NEVER">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <HBox prefHeight="124.0" prefWidth="410.0">
+                  <HBox prefHeight="148.0" prefWidth="400.0" VBox.vgrow="NEVER">
                      <children>
                         <VBox prefHeight="124.0" prefWidth="212.0">
                            <children>
@@ -132,16 +132,40 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <TableView prefHeight="329.0">
-                    <columns>
-                      <TableColumn prefWidth="188.0" text="Ingredients" />
-                      <TableColumn prefWidth="156.0" text="Amount" />
-                    </columns>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </TableView>
-                  <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <VBox prefHeight="311.0" prefWidth="400.0">
+                     <children>
+                        <TableView fixedCellSize="0.0" prefHeight="264.0" prefWidth="380.0">
+                          <columns>
+                            <TableColumn prefWidth="140.0" text="Ingredients" />
+                            <TableColumn prefWidth="162.0" text="Amount" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Ingredient name" />
+                                    <Label layoutX="10.0" layoutY="10.0" text="Amount" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField />
+                                    <TextField />
+                                    <Button mnemonicParsing="false" text="Button" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="58.0" prefWidth="400.0" VBox.vgrow="NEVER">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Create">
                            <HBox.margin>

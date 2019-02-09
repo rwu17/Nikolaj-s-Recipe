@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 //import javax.swing.text.html.ImageView;
 //import java.awt.*;
 import java.awt.color.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import javafx.scene.control.Button;
 import javafx.scene.effect.*;
@@ -49,6 +51,8 @@ public class MainMenuController {
     }
 
     public void initiateRecipes(){
+        ArrayList<Recipe> items;
+
 
     }
 
