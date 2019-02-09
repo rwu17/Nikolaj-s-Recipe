@@ -47,7 +47,12 @@ public class MainMenuController {
     }
 
     public void backToMain(){
-        recipeCreation.setVisible(false);
+        boolean confirmed = Main.gui.showYesNoDialog("Nikolaj's Recipe",
+                "Are you sure you want to cancel this recipe?");
+
+        if (confirmed){
+            recipeCreation.setVisible(false);
+        }
     }
 
     public void initiateRecipes(){

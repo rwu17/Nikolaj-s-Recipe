@@ -124,8 +124,8 @@ public class GUI {
         alert.setTitle((titleKey));
         alert.setContentText((contentKey));
 
-        ButtonType yes = new ButtonType(("button_yes"), ButtonBar.ButtonData.YES);
-        ButtonType no = new ButtonType(("button_no"), ButtonBar.ButtonData.NO);
+        ButtonType yes = new ButtonType(("Yes"), ButtonBar.ButtonData.YES);
+        ButtonType no = new ButtonType(("No"), ButtonBar.ButtonData.NO);
 
         alert.getButtonTypes().setAll(yes, no);
         Optional<ButtonType> result = alert.showAndWait();

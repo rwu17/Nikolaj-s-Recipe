@@ -101,21 +101,21 @@
             <Separator orientation="VERTICAL" prefHeight="532.0" prefWidth="3.0" />
             <VBox fx:id="recipeCreation" prefHeight="542.0" prefWidth="410.0">
                <children>
-                  <Label prefHeight="21.0" prefWidth="170.0" text="Create Recipe" VBox.vgrow="NEVER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
                   <HBox prefHeight="148.0" prefWidth="400.0" VBox.vgrow="NEVER">
                      <children>
-                        <VBox prefHeight="124.0" prefWidth="212.0">
+                        <VBox prefHeight="147.0" prefWidth="203.0">
                            <children>
-                              <Label prefHeight="57.0" prefWidth="75.0" text="Recipe Name">
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
+                              <Label prefHeight="40.0" prefWidth="188.0" text="Create Recipe" VBox.vgrow="NEVER">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
                               </Label>
-                              <TextField />
+                              <Label prefHeight="21.0" prefWidth="75.0" text="Recipe Name">
+                                 <VBox.margin>
+                                    <Insets top="45.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Enter name of the recipe" />
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -127,20 +127,23 @@
                         <VBox alignment="CENTER" prefHeight="124.0" prefWidth="179.0">
                            <children>
                               <ImageView fitHeight="96.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" />
-                              <Button mnemonicParsing="false" text="Add Image" />
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Add Image" />
                            </children>
                         </VBox>
                      </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
                   </HBox>
                   <VBox prefHeight="311.0" prefWidth="400.0">
                      <children>
-                        <TableView fixedCellSize="0.0" prefHeight="264.0" prefWidth="380.0">
+                        <TableView fixedCellSize="0.0" prefHeight="380.0" prefWidth="380.0">
                           <columns>
-                            <TableColumn prefWidth="140.0" text="Ingredients" />
-                            <TableColumn prefWidth="162.0" text="Amount" />
+                            <TableColumn prefWidth="192.0" text="Ingredients" />
+                            <TableColumn prefWidth="191.0" text="Amount" />
                           </columns>
                            <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
                            </VBox.margin>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -148,18 +151,27 @@
                         </TableView>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefHeight="30.0" prefWidth="400.0" spacing="70.0">
                                  <children>
                                     <Label text="Ingredient name" />
                                     <Label layoutX="10.0" layoutY="10.0" text="Amount" />
                                  </children>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
                               </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                  <children>
-                                    <TextField />
-                                    <TextField />
-                                    <Button mnemonicParsing="false" text="Button" />
+                                    <TextField prefHeight="25.0" prefWidth="148.0" promptText="Name of ingredient" />
+                                    <TextField prefHeight="25.0" prefWidth="150.0" promptText="Amount of the ingredient" />
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Add">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></Button>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="5.0" />
+                                 </VBox.margin>
                               </HBox>
                            </children>
                         </VBox>

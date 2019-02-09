@@ -115,7 +115,7 @@
                                     <Insets top="45.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField />
+                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Enter name of the recipe" />
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -127,7 +127,7 @@
                         <VBox alignment="CENTER" prefHeight="124.0" prefWidth="179.0">
                            <children>
                               <ImageView fitHeight="96.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" />
-                              <Button mnemonicParsing="false" text="Add Image" />
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Add Image" />
                            </children>
                         </VBox>
                      </children>
@@ -139,8 +139,8 @@
                      <children>
                         <TableView fixedCellSize="0.0" prefHeight="380.0" prefWidth="380.0">
                           <columns>
-                            <TableColumn prefWidth="140.0" text="Ingredients" />
-                            <TableColumn prefWidth="162.0" text="Amount" />
+                            <TableColumn prefWidth="192.0" text="Ingredients" />
+                            <TableColumn prefWidth="191.0" text="Amount" />
                           </columns>
                            <VBox.margin>
                               <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
@@ -162,8 +162,8 @@
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                  <children>
-                                    <TextField />
-                                    <TextField />
+                                    <TextField prefHeight="25.0" prefWidth="148.0" promptText="Name of ingredient" />
+                                    <TextField prefHeight="25.0" prefWidth="150.0" promptText="Amount of the ingredient" />
                                     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Add">
                                        <HBox.margin>
                                           <Insets />
