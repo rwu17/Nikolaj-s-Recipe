@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 //import javax.swing.text.html.ImageView;
 //import java.awt.*;
 import java.awt.color.*;
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -12,17 +13,25 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.effect.Blend;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 public class MainMenuController {
-    @FXML ImageView recipeNew;
+    @FXML VBox MenuID;
+    @FXML HBox topSide;
+    @FXML VBox leftSide;
     @FXML VBox recipeCreation;
+    @FXML ImageView recipeNew;
     @FXML Button toMainMenu;
+    @FXML Button createButton;
 
     public void recipeCreateMenu(){
+        leftSide.setDisable(true);
+        topSide.setDisable(true);
         recipeCreation.setVisible(true);
-        System.out.println("create a new recipe");
     }
 
     public void recipeSearch(){
@@ -52,6 +61,17 @@ public class MainMenuController {
 
         if (confirmed){
             recipeCreation.setVisible(false);
+            leftSide.setDisable(false);
+            topSide.setDisable(false);
+        }
+    }
+
+    public void createRecipe(){
+        boolean confirmed = Main.gui.showYesNoDialog("Nikolaj's Recipe",
+                "Are you sure you want to create the recipe?");
+
+        if (confirmed){
+            //Recipe recipe = new Recipe();
         }
     }
 
@@ -61,4 +81,14 @@ public class MainMenuController {
 
     }
 
+    public void addImage(){
+        final DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        Stage stage = (Stage) MenuID.getScene().getWindow();
+        File selectedFile = directoryChooser.showDialog(stage);
+
+        if (selectedFile != null){
+
+        }
+    }
 }

@@ -18,9 +18,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainMenuController">
+<VBox fx:id="MenuID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainMenuController">
    <children>
-      <HBox alignment="CENTER_LEFT" maxHeight="150.0" prefHeight="70.0" prefWidth="800.0">
+      <HBox fx:id="topSide" alignment="CENTER_LEFT" maxHeight="150.0" prefHeight="70.0" prefWidth="800.0">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
@@ -30,7 +30,7 @@
          <children>
             <AnchorPane prefHeight="8.0" prefWidth="585.0">
                <children>
-                  <TextField layoutX="2.0" layoutY="10.0" onAction="#recipeSearch" prefHeight="25.0" prefWidth="678.0" promptText="Enter name of recipe or ingredient">
+                  <TextField fx:id="searchTextField" layoutX="2.0" layoutY="10.0" onAction="#recipeSearch" prefHeight="25.0" prefWidth="678.0" promptText="Enter name of recipe or ingredient">
                      <padding>
                         <Insets left="25.0" />
                      </padding></TextField>
@@ -62,42 +62,46 @@
             <Insets />
          </VBox.margin>
          <children>
-            <VBox prefHeight="580.0" prefWidth="390.0">
+            <VBox fx:id="leftSide" prefHeight="580.0" prefWidth="390.0">
                <children>
-                  <GridPane prefHeight="532.0" prefWidth="385.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <HBox prefHeight="532.0" prefWidth="387.0">
                      <children>
-                        <Label text="Create Recipe">
+                        <GridPane prefHeight="532.0" prefWidth="385.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Create Recipe">
+                                 <padding>
+                                    <Insets left="10.0" top="90.0" />
+                                 </padding>
+                              </Label>
+                              <ImageView fx:id="recipeNew" fitHeight="113.0" fitWidth="95.0" onMouseExited="#removeEffect" onMouseMoved="#blendImage" onMousePressed="#recipeCreateMenu" pickOnBounds="true" preserveRatio="true" styleClass="image-blue">
+                                 <image>
+                                    <Image url="@../images/newRecipe.png" />
+                                 </image>
+                                 <GridPane.margin>
+                                    <Insets bottom="20.0" />
+                                 </GridPane.margin>
+                              </ImageView>
+                           </children>
                            <padding>
-                              <Insets left="10.0" top="90.0" />
+                              <Insets bottom="5.0" left="10.0" right="10.0" />
                            </padding>
-                        </Label>
-                        <ImageView fx:id="recipeNew" fitHeight="113.0" fitWidth="95.0" onMouseExited="#removeEffect" onMouseMoved="#blendImage" onMousePressed="#recipeCreateMenu" pickOnBounds="true" preserveRatio="true" styleClass="image-blue">
-                           <image>
-                              <Image url="@../images/newRecipe.png" />
-                           </image>
-                           <GridPane.margin>
-                              <Insets bottom="20.0" />
-                           </GridPane.margin>
-                        </ImageView>
+                        </GridPane>
+                        <ScrollBar orientation="VERTICAL" prefHeight="533.0" prefWidth="14.0" />
                      </children>
-                     <padding>
-                        <Insets bottom="5.0" left="10.0" right="10.0" />
-                     </padding>
-                  </GridPane>
+                  </HBox>
                </children></VBox>
-            <ScrollBar orientation="VERTICAL" prefHeight="533.0" prefWidth="14.0" />
             <Separator orientation="VERTICAL" prefHeight="532.0" prefWidth="3.0" />
             <VBox fx:id="recipeCreation" prefHeight="542.0" prefWidth="410.0">
                <children>
@@ -115,7 +119,10 @@
                                     <Insets top="45.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Enter name of the recipe" />
+                              <TextField fx:id="recipeNameTextField" prefHeight="25.0" prefWidth="203.0" promptText="Enter name of the recipe">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding></TextField>
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -127,7 +134,7 @@
                         <VBox alignment="CENTER" prefHeight="124.0" prefWidth="179.0">
                            <children>
                               <ImageView fitHeight="96.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Add Image" />
+                              <Button mnemonicParsing="false" onAction="#addImage" prefHeight="25.0" prefWidth="75.0" text="Add Image" />
                            </children>
                         </VBox>
                      </children>
@@ -137,10 +144,10 @@
                   </HBox>
                   <VBox prefHeight="311.0" prefWidth="400.0">
                      <children>
-                        <TableView fixedCellSize="0.0" prefHeight="380.0" prefWidth="380.0">
+                        <TableView fx:id="ingredientTable" fixedCellSize="0.0" prefHeight="380.0" prefWidth="380.0">
                           <columns>
-                            <TableColumn prefWidth="192.0" text="Ingredients" />
-                            <TableColumn prefWidth="191.0" text="Amount" />
+                            <TableColumn fx:id="ingredients" prefWidth="192.0" text="Ingredients" />
+                            <TableColumn fx:id="amount" prefWidth="191.0" text="Amount" />
                           </columns>
                            <VBox.margin>
                               <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
@@ -151,7 +158,7 @@
                         </TableView>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <HBox prefHeight="30.0" prefWidth="400.0" spacing="70.0">
+                              <HBox prefHeight="30.0" prefWidth="400.0" spacing="72.0">
                                  <children>
                                     <Label text="Ingredient name" />
                                     <Label layoutX="10.0" layoutY="10.0" text="Amount" />
@@ -162,9 +169,15 @@
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="148.0" promptText="Name of ingredient" />
-                                    <TextField prefHeight="25.0" prefWidth="150.0" promptText="Amount of the ingredient" />
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Add">
+                                    <TextField fx:id="ingredientNameTextField" prefHeight="25.0" prefWidth="150.0" promptText="Name of ingredient">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding></TextField>
+                                    <TextField fx:id="ingredientAmountTextField" prefHeight="25.0" prefWidth="150.0" promptText="Amount of the ingredient">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding></TextField>
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Add">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin></Button>
@@ -179,7 +192,11 @@
                   </VBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="58.0" prefWidth="400.0" VBox.vgrow="NEVER">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Create">
+                        <Button layoutX="190.0" layoutY="18.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Remove Ingredient">
+                           <HBox.margin>
+                              <Insets right="32.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="createButton" mnemonicParsing="false" onAction="#createRecipe" prefHeight="40.0" prefWidth="100.0" text="Create">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin></Button>
