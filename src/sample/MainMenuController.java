@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class MainMenuController {
@@ -82,13 +83,20 @@ public class MainMenuController {
     }
 
     public void addImage(){
-        final DirectoryChooser directoryChooser = new DirectoryChooser();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose a picture");
+
+        //final DirectoryChooser directoryChooser = new DirectoryChooser();
 
         Stage stage = (Stage) MenuID.getScene().getWindow();
-        File selectedFile = directoryChooser.showDialog(stage);
 
+        fileChooser.showOpenDialog(stage);
+
+        //File selectedFile = directoryChooser.showDialog(stage);
+        /*
         if (selectedFile != null){
 
         }
+        */
     }
 }
