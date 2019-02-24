@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 
 //import javax.swing.text.html.ImageView;
 //import java.awt.*;
+import java.awt.*;
 import java.awt.color.*;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ public class MainMenuController {
     @FXML ImageView recipeNew;
     @FXML Button toMainMenu;
     @FXML Button createButton;
+    @FXML TextField recipeNameTextField;
 
     public void recipeCreateMenu(){
         leftSide.setDisable(true);
@@ -73,6 +76,12 @@ public class MainMenuController {
 
         if (confirmed){
             //Recipe recipe = new Recipe();
+            File recipeFile = new File(recipeNameTextField.getText() + ".csv");
+            try {
+                recipeFile.createNewFile();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
         }
     }
 

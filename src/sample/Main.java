@@ -44,5 +44,4 @@ public class Main extends Application {
         gui.changeView("MainMenu");
         primaryStage.show();
     }
-
 }
