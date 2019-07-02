@@ -39,9 +39,11 @@ public class MainMenuController {
     @FXML Button toMainMenu;
     @FXML Button createButton;
     @FXML TextField recipeNameTextField;
-    @FXML Button addItemBTN;
+    @FXML Button addItemButton;
+    @FXML Button removeItemButton;
     @FXML TextField ingredientNameTextField;
     @FXML TextField ingredientAmountTextField;
+    @FXML Button deleteRecipeButton;
     @FXML TableView<Item> ingredientTable;
     @FXML TableColumn<Item, String> ingredients;
     @FXML TableColumn<Item, Integer> amount;
@@ -194,8 +196,9 @@ public class MainMenuController {
 
     public void addItem(){
 
-        ingredientNameTextField.getText();
-        ingredientAmountTextField.getText();
+        String ingredientName = ingredientNameTextField.getText();
+        String ingredientAmount = ingredientAmountTextField.getText();
+        System.out.println("Name: " + ingredientName + " Amount: " + ingredientAmount);
 
     }
 
@@ -222,6 +225,10 @@ public class MainMenuController {
 
         })
         */
+    }
+
+    public void removeRecipe(){
+
     }
 
 }
