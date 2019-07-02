@@ -1,5 +1,10 @@
 package sample;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.FileSystem;
 import java.util.ArrayList;
 
 public class Recipe {
@@ -23,6 +28,24 @@ public class Recipe {
     void removeItem(Recipe recipe, Item item, int amount) {
         for (int i = 0; i < amount; i++){
             recipe.items.remove(item);
+        }
+    }
+
+    static File createRecipeList() throws IOException{
+        File recipeList = new File("Recipes.txt");
+        recipeList.createNewFile();
+        return recipeList;
+    }
+
+    static void loadRecipeList(File recipesList, ArrayList<String> recipes) throws  IOException{
+        try (BufferedReader br = new BufferedReader(new FileReader(recipesList))){
+            String line;
+            while ((line = br.readLine()) != null){
+                recipes.add(line);
+            }
+            br.close();
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
 

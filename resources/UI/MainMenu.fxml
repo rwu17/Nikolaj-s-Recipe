@@ -177,7 +177,7 @@
                                        <padding>
                                           <Insets left="5.0" />
                                        </padding></TextField>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Add">
+                                    <Button fx:id="addItemBTN" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="65.0" text="Add">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin></Button>
