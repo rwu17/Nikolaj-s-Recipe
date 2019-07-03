@@ -187,7 +187,7 @@
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin></Button>
-                                    <Button fx:id="removeItemButton" layoutX="230.0" layoutY="10.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="80.0" text="Remove" />
+                                    <Button fx:id="removeItemButton" disable="true" layoutX="230.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Remove" />
                                  </children>
                                  <VBox.margin>
                                     <Insets left="5.0" />

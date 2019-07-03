@@ -4,28 +4,27 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.FileSystem;
 import java.util.ArrayList;
 
 public class Recipe {
     String name;
     String Image; //for image location purpose
 
-    ArrayList<Item> items;
+    ArrayList<Ingredient> items;
 
-    public Recipe(String name, String image, ArrayList<Item> items) {
+    public Recipe(String name, String image, ArrayList<Ingredient> items) {
         this.name = name;
         Image = image;
         this.items = items;
     }
 
-    void addItem(Recipe recipe, Item item, int amount) {
+    void addItem(Recipe recipe, Ingredient item, int amount) {
         for (int i = 0; i < amount; i++){
             recipe.items.add(item);
         }
     }
 
-    void removeItem(Recipe recipe, Item item, int amount) {
+    void removeItem(Recipe recipe, Ingredient item, int amount) {
         for (int i = 0; i < amount; i++){
             recipe.items.remove(item);
         }

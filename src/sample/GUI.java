@@ -137,4 +137,18 @@ public class GUI {
 
         return answer;
     }
+
+    public static void warningDialog(String titleKey, String contentKey){
+        boolean answer = false;
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        alert.setTitle((titleKey));
+        alert.setContentText(contentKey);
+
+        ButtonType okay = new ButtonType(("Okay"), ButtonBar.ButtonData.OK_DONE);
+
+        alert.getButtonTypes().setAll(okay);
+        Optional<ButtonType> result = alert.showAndWait();
+    }
 }

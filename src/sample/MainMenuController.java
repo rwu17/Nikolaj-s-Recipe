@@ -1,16 +1,11 @@
 package sample;
 
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 
 //import javax.swing.text.html.ImageView;
 //import java.awt.*;
-import java.awt.*;
-import java.awt.color.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,13 +14,14 @@ import java.util.ArrayList;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.effect.Blend;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
@@ -44,11 +40,11 @@ public class MainMenuController {
     @FXML TextField ingredientNameTextField;
     @FXML TextField ingredientAmountTextField;
     @FXML Button deleteRecipeButton;
-    @FXML TableView<Item> ingredientTable;
-    @FXML TableColumn<Item, String> ingredients;
-    @FXML TableColumn<Item, Integer> amount;
+    @FXML TableView<Ingredient> ingredientTable;
+    @FXML TableColumn<Ingredient, String> ingredients;
+    @FXML TableColumn<Ingredient, String> amount;
 
-    private TableManager<Item> itemsManager;
+    private TableManager<Ingredient> itemsManager;
 
 
     @FXML
@@ -56,7 +52,24 @@ public class MainMenuController {
         itemsManager = new TableManager<>(ingredientTable);
         itemsManager.setupColumns();
         ingredientTable.getSelectionModel().selectedItemProperty().addListener(this::onItemSelected);
+        ingredients.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        amount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
     }
+
+    /*
+    public void ingredientAmountValidation(){
+        ingredientNameTextField.focusedProperty().addListener((arg0, oldValue, newValue) -> {
+            if (!newValue) { //when focus lost
+                if(!ingredientNameTextField.getText().matches("\\d+()")){
+                //if(!ingredientNameTextField.getText().matches("[0-9]\\.[0-9]|6\\.0")){
+                    //when it not matches the pattern (1.0 - 6.0)
+                    //set the textField empty
+                    ingredientNameTextField.setText("");
+                }
+            }
+        });
+    }
+    */
 
     public void recipeCreateMenu(){
         leftSide.setDisable(true);
@@ -196,13 +209,43 @@ public class MainMenuController {
 
     public void addItem(){
 
-        String ingredientName = ingredientNameTextField.getText();
-        String ingredientAmount = ingredientAmountTextField.getText();
-        System.out.println("Name: " + ingredientName + " Amount: " + ingredientAmount);
+        String ingredientName = null;
 
+        String ingredientAmount = null;
+
+        if (!((ingredientNameTextField.getText().isEmpty()) && (ingredientAmountTextField.getText().isEmpty()))){
+
+            ingredientName = ingredientNameTextField.getText();
+            ingredientAmount = ingredientAmountTextField.getText();
+
+            Ingredient ingredient = new Ingredient(ingredientName, ingredientAmount);
+
+            ingredientTable.getItems().add(ingredient);
+
+            ingredientNameTextField.clear();
+            ingredientAmountTextField.clear();
+
+            System.out.println("Name: " + ingredientName + " Amount: " + ingredientAmount);
+
+        } else {
+            addItemButton.setDisable(true);
+            createButton.setDisable(true);
+            toMainMenu.setDisable(true);
+            deleteRecipeButton.setDisable(true);
+
+            GUI.warningDialog("Nikolaj's Recipe",
+                    "You forgot either the name or the amount of ingredient!");
+
+            addItemButton.setDisable(false);
+            createButton.setDisable(false);
+            toMainMenu.setDisable(false);
+            deleteRecipeButton.setDisable(false);
+        }
+
+        ingredientTable.setEditable(true);
     }
 
-    private void onItemSelected(ObservableValue<? extends Item> obs, Item oldSelection, Item newSelection){
+    private void onItemSelected(ObservableValue<? extends Ingredient> obs, Ingredient oldSelection, Ingredient newSelection){
         //selectedItem = newSelection;
 
         if (oldSelection == newSelection){
