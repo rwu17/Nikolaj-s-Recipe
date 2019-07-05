@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 //import javax.swing.text.html.ImageView;
@@ -19,6 +21,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.effect.Blend;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -52,8 +55,15 @@ public class MainMenuController {
         itemsManager = new TableManager<>(ingredientTable);
         itemsManager.setupColumns();
         ingredientTable.getSelectionModel().selectedItemProperty().addListener(this::onItemSelected);
+
         ingredients.setCellValueFactory(new PropertyValueFactory<>("Name"));
         amount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+
+        ingredientTable.setEditable(true);
+
+        ingredients.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        amount.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
     /*
@@ -100,7 +110,7 @@ public class MainMenuController {
 
     public void backToMain(){
         boolean confirmed = Main.gui.showYesNoDialog("Nikolaj's Recipe",
-                "Are you sure you want to cancel this recipe?");
+                "Any changes done to this recipe will not be saved, are you sure you want to proceed?");
 
         if (confirmed){
             recipeCreation.setVisible(false);
@@ -227,22 +237,15 @@ public class MainMenuController {
 
             System.out.println("Name: " + ingredientName + " Amount: " + ingredientAmount);
 
-        } else {
-            addItemButton.setDisable(true);
-            createButton.setDisable(true);
-            toMainMenu.setDisable(true);
-            deleteRecipeButton.setDisable(true);
-
+        } else if(((ingredientNameTextField.getText().isEmpty()) || (ingredientAmountTextField.getText().isEmpty()))){
             GUI.warningDialog("Nikolaj's Recipe",
                     "You forgot either the name or the amount of ingredient!");
-
-            addItemButton.setDisable(false);
-            createButton.setDisable(false);
-            toMainMenu.setDisable(false);
-            deleteRecipeButton.setDisable(false);
         }
 
-        ingredientTable.setEditable(true);
+        else {
+            GUI.warningDialog("Nikolaj's Recipe",
+                    "You must fill the name and the amount of ingredient!");
+        }
     }
 
     private void onItemSelected(ObservableValue<? extends Ingredient> obs, Ingredient oldSelection, Ingredient newSelection){
@@ -271,7 +274,20 @@ public class MainMenuController {
     }
 
     public void removeRecipe(){
-
+        boolean confirmed = Main.gui.showYesNoDialog("Nikolaj's Recipe", "Are you sure you want to delete this recipe? The deleted recipe cannot be recovered!");
     }
 
+    public void onEditNameChange(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
+        Ingredient ingredient = ingredientTable.getSelectionModel().getSelectedItem();
+        ingredient.setName(ingredientStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditAmountChange(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
+        Ingredient ingredient = ingredientTable.getSelectionModel().getSelectedItem();
+        ingredient.setAmount(ingredientStringCellEditEvent.getNewValue());
+    }
+
+    public void removeItem(ActionEvent actionEvent) {
+        ingredientTable.getItems().removeAll(ingredientTable.getSelectionModel().getSelectedItem());
+    }
 }

@@ -152,8 +152,8 @@
                      <children>
                         <TableView fx:id="ingredientTable" fixedCellSize="0.0" prefHeight="380.0" prefWidth="380.0">
                           <columns>
-                            <TableColumn fx:id="ingredients" prefWidth="192.0" text="Ingredients" />
-                            <TableColumn fx:id="amount" prefWidth="191.0" text="Amount" />
+                            <TableColumn fx:id="ingredients" onEditCommit="#onEditNameChange" prefWidth="192.0" text="Ingredients" />
+                            <TableColumn fx:id="amount" onEditCommit="#onEditAmountChange" prefWidth="191.0" text="Amount" />
                           </columns>
                            <VBox.margin>
                               <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
@@ -187,7 +187,7 @@
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin></Button>
-                                    <Button fx:id="removeItemButton" disable="true" layoutX="230.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Remove" />
+                                    <Button fx:id="removeItemButton" layoutX="230.0" layoutY="10.0" mnemonicParsing="false" onAction="#removeItem" prefHeight="25.0" prefWidth="80.0" text="Remove" />
                                  </children>
                                  <VBox.margin>
                                     <Insets left="5.0" />
@@ -199,15 +199,15 @@
                   </VBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="58.0" prefWidth="400.0" VBox.vgrow="NEVER">
                      <children>
-                        <Button fx:id="deleteRecipeButton" layoutX="190.0" layoutY="18.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="150.0" text="Delete Recipe">
+                        <Button fx:id="deleteRecipeButton" layoutX="190.0" layoutY="18.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="150.0" style="-fx-background-color: #E54B4B;" text="Delete" textFill="WHITE">
                            <HBox.margin>
                               <Insets bottom="1.0" right="32.0" />
                            </HBox.margin></Button>
-                        <Button fx:id="createButton" mnemonicParsing="false" onAction="#createRecipe" prefHeight="40.0" prefWidth="100.0" text="Create">
+                        <Button fx:id="createButton" mnemonicParsing="false" onAction="#createRecipe" prefHeight="40.0" prefWidth="100.0" text="Done">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin></Button>
-                        <Button fx:id="toMainMenu" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="100.0" text="Back">
+                        <Button fx:id="toMainMenu" mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="100.0" text="Canel">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin></Button>
