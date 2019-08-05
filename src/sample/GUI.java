@@ -11,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.MissingResourceException;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -124,10 +125,10 @@ public class GUI {
         alert.setTitle((titleKey));
         alert.setContentText((contentKey));
 
-        ButtonType yes = new ButtonType(("Yes"), ButtonBar.ButtonData.YES);
         ButtonType no = new ButtonType(("No"), ButtonBar.ButtonData.NO);
+        ButtonType yes = new ButtonType(("Yes"), ButtonBar.ButtonData.YES);
 
-        alert.getButtonTypes().setAll(yes, no);
+        alert.getButtonTypes().setAll(no, yes);
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.get() == yes)

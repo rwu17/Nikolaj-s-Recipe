@@ -5,29 +5,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Recipe {
     String name;
     String Image; //for image location purpose
-
     ArrayList<Ingredient> items;
 
     public Recipe(String name, String image, ArrayList<Ingredient> items) {
         this.name = name;
         Image = image;
         this.items = items;
-    }
-
-    void addItem(Recipe recipe, Ingredient item, int amount) {
-        for (int i = 0; i < amount; i++){
-            recipe.items.add(item);
-        }
-    }
-
-    void removeItem(Recipe recipe, Ingredient item, int amount) {
-        for (int i = 0; i < amount; i++){
-            recipe.items.remove(item);
-        }
     }
 
     static File createRecipeList() throws IOException{
@@ -37,6 +25,7 @@ public class Recipe {
     }
 
     static void loadRecipeList(File recipesList, ArrayList<String> recipes) throws  IOException{
+
         try (BufferedReader br = new BufferedReader(new FileReader(recipesList))){
             String line;
             while ((line = br.readLine()) != null){

@@ -33,8 +33,10 @@ public class MainMenuController {
     @FXML VBox MenuID;
     @FXML HBox topSide;
     @FXML VBox leftSide;
+    @FXML TextField searchTextField;
+    @FXML Button searchButton;
     @FXML VBox recipeCreation;
-    @FXML ImageView recipeNew;
+    @FXML Button recipeCreate;
     @FXML Button toMainMenu;
     @FXML Button createButton;
     @FXML TextField recipeNameTextField;
@@ -81,16 +83,17 @@ public class MainMenuController {
     }
     */
 
-    public void recipeCreateMenu(){
-        leftSide.setDisable(true);
-        topSide.setDisable(true);
-        recipeCreation.setVisible(true);
-    }
-
     public void recipeSearch(){
-        System.out.println("searching for a existing recipe");
-    }
+        if (searchTextField.getText().isEmpty()){
+            GUI.warningDialog("Nikolaj's Recipe", "Please enter name of an ingredient or recipe!");
+        } else {
+            //if the search word exists
+            System.out.println(searchTextField.getText());
+        }
 
+
+    }
+    /*
     public void blendImage(){
         Blend blend = new Blend();
         blend.setMode(BlendMode.COLOR_BURN);
@@ -107,6 +110,7 @@ public class MainMenuController {
     public void removeEffect(){
         recipeNew.setEffect(null);
     }
+    */
 
     public void backToMain(){
         boolean confirmed = Main.gui.showYesNoDialog("Nikolaj's Recipe",
@@ -120,54 +124,62 @@ public class MainMenuController {
     }
 
     public void createRecipe() throws IOException{
-        boolean confirmed = Main.gui.showYesNoDialog("Nikolaj's Recipe",
-                "Are you sure you want to create the recipe?");
 
-        if (confirmed){
-            //Recipe recipe = new Recipe();
+        if (recipeNameTextField.getText().isEmpty()){
 
-            File recipesList = Recipe.createRecipeList();
+            GUI.warningDialog("Nikolaj's Recipe", "Please enter a name for your recipe!");
 
-            BufferedWriter bw = null;
+        } else {
 
-            File recipeFile = new File(recipeNameTextField.getText() + ".csv");
-            try {
-                recipeFile.createNewFile();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-            try{
-                bw = new BufferedWriter(new FileWriter(recipesList, true));
-            } catch (IOException e){
-                System.out.println("bw = new bufferedwriter error");
-                e.printStackTrace();
-            }
-            try {
-                bw.append(recipeNameTextField.getText()).append("\n");
-            } catch (IOException e){
-                System.out.println("bw.append error");
-                e.printStackTrace();
-            }
+            boolean confirmed = Main.gui.showYesNoDialog("Nikolaj's Recipe",
+                    "Are you sure you want to create the recipe?");
 
-            ArrayList<String> recipes = new ArrayList<>();
+            if (confirmed){
+                //Recipe recipe = new Recipe();
 
-            try (BufferedReader br = new BufferedReader(new FileReader(recipesList))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    recipes.add(line);
+                File recipesList = Recipe.createRecipeList();
+
+                BufferedWriter bw = null;
+
+                File recipeFile = new File(recipeNameTextField.getText() + ".csv");
+                try {
+                    recipeFile.createNewFile();
+                } catch (IOException e){
+                    e.printStackTrace();
                 }
-                System.out.print(recipes);
-                System.out.println("\n---------------------\n");
-                br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                try{
+                    bw = new BufferedWriter(new FileWriter(recipesList, true));
+                } catch (IOException e){
+                    System.out.println("bw = new bufferedwriter error");
+                    e.printStackTrace();
+                }
+                try {
+                    bw.append(recipeNameTextField.getText()).append("\n");
+                } catch (IOException e){
+                    System.out.println("bw.append error");
+                    e.printStackTrace();
+                }
 
-            System.out.println("\n---------------------\n");
-            try {
-                bw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                ArrayList<String> recipes = new ArrayList<>();
+
+                try (BufferedReader br = new BufferedReader(new FileReader(recipesList))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        recipes.add(line);
+                    }
+                    System.out.print(recipes);
+                    System.out.println("\n---------------------\n");
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println("\n---------------------\n");
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -289,5 +301,15 @@ public class MainMenuController {
 
     public void removeItem(ActionEvent actionEvent) {
         ingredientTable.getItems().removeAll(ingredientTable.getSelectionModel().getSelectedItem());
+    }
+
+    public void gotoSettings(ActionEvent actionEvent) throws IOException{
+        Main.gui.changeView("SettingMenu");
+    }
+
+    public void recipeNew(ActionEvent actionEvent) {
+        leftSide.setDisable(true);
+        topSide.setDisable(true);
+        recipeCreation.setVisible(true);
     }
 }
