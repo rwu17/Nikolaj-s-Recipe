@@ -49,10 +49,6 @@
          </VBox.margin></VBox>
       <HBox alignment="CENTER" prefHeight="76.0" prefWidth="600.0" spacing="45.0">
          <children>
-            <Button fx:id="saveSettingButton" mnemonicParsing="false" onAction="#saveSettings" prefHeight="60.0" prefWidth="150.0" text="Confirm">
-               <font>
-                  <Font size="20.0" />
-               </font></Button>
             <Button fx:id="backToMainButton" mnemonicParsing="false" onAction="#backToMain" prefHeight="60.0" prefWidth="150.0" text="Back">
                <font>
                   <Font size="20.0" />

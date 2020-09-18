@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.prefs.Preferences;
 
 public class SettingMenuController {
@@ -21,19 +24,20 @@ public class SettingMenuController {
     @FXML Button backToMainButton;
     @FXML TextField recipeLocationTextField;
 
+    private Preferences prefs;
 
     private String recipePath;
 
     @FXML
     public void initialize() throws IOException{
-
-        File Settings = sample.Settings.createSettings();
-
-        sample.Settings.LoadSettings(Settings, recipeLocationTextField);
+        //Use previous values for import/export directories
+        prefs = Preferences.userNodeForPackage(sample.Main.class);
+        //prefs = Preferences.userNodeForPackage(dk.aau.cs.ds308e18.Main.class);
+        setDestinationPath(prefs.get("dataExportDestinationDirectory", ""));
 
     }
 
-    public void browseLocation(ActionEvent actionEvent) throws IOException{
+    public void browseLocation(ActionEvent event){
 
         final DirectoryChooser directoryChooser = new DirectoryChooser();
 
@@ -42,40 +46,20 @@ public class SettingMenuController {
         File selectedDirectory = directoryChooser.showDialog(stage);
 
         if (selectedDirectory != null){
+            setDestinationPath(selectedDirectory.getAbsolutePath());
 
-            File Settings = sample.Settings.createSettings();
 
-            BufferedWriter bw = new BufferedWriter(new FileWriter(Settings, true));
-
-            recipeLocationTextField.setText(selectedDirectory.getAbsolutePath());
-
-            bw.append(recipeLocationTextField.getText());
         }
     }
 
-    public void saveSettings(ActionEvent actionEvent) {
-        boolean confirm = Main.gui.showYesNoDialog("Nikolaj's Recipe", "Any changes to the settings will be saved, are you sure you want to proceed?");
+    private void setDestinationPath(String path) {
+        recipePath = path;
+        recipeLocationTextField.setText(path);
 
-        if (confirm){
-            try {
-                Main.gui.changeView("MainMenu");
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        }
+        prefs.put("dataExportDestinationDirectory", path);
     }
 
-
-    public void backToMain(ActionEvent actionEvent) {
-        boolean confirm = Main.gui.showYesNoDialog("Nikolaj's Recipe", "Any changes to the settings will not be saved, are you sure you want to go back to the main menu?");
-
-        if (confirm){
-            try {
-                Main.gui.changeView("MainMenu");
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-
-        }
+    public void backToMain(ActionEvent actionEvent) throws IOException {
+        Main.gui.changeView("MainMenu");
     }
 }

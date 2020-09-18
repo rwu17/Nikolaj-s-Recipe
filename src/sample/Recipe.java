@@ -1,40 +1,62 @@
 package sample;
 
+import javafx.scene.image.Image;
+
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Recipe {
     String name;
-    String Image; //for image location purpose
-    ArrayList<Ingredient> items;
+    javafx.scene.image.Image ImageLocation; //for image location purpose
 
-    public Recipe(String name, String image, ArrayList<Ingredient> items) {
+    ArrayList<String> ingredientNames;
+
+    ArrayList<String> ingredientAmounts;
+
+    public Recipe(String name, Image imageLocation, ArrayList<String> ingredientNames, ArrayList<String> ingredientAmounts) {
         this.name = name;
-        Image = image;
-        this.items = items;
+        ImageLocation = imageLocation;
+        this.ingredientNames = ingredientNames;
+        this.ingredientAmounts = ingredientAmounts;
     }
 
-    static File createRecipeList() throws IOException{
-        File recipeList = new File("Recipes.txt");
-        recipeList.createNewFile();
-        return recipeList;
+    public Recipe() {
     }
 
-    static void loadRecipeList(File recipesList, ArrayList<String> recipes) throws  IOException{
+    public String getName() {
+        return name;
+    }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(recipesList))){
-            String line;
-            while ((line = br.readLine()) != null){
-                recipes.add(line);
-            }
-            br.close();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public javafx.scene.image.Image getImageLocation() {
+        return ImageLocation;
+    }
+
+    public void setImageLocation(javafx.scene.image.Image imageLocation) {
+        ImageLocation = imageLocation;
+    }
+
+    public ArrayList<String> getIngredientNames() {
+        return ingredientNames;
+    }
+
+    public void setIngredientNames(ArrayList<String> ingredientNames) {
+        this.ingredientNames = ingredientNames;
+    }
+
+    public ArrayList<String> getIngredientAmounts() {
+        return ingredientAmounts;
+    }
+
+    public void setIngredientAmounts(ArrayList<String> ingredientAmounts) {
+        this.ingredientAmounts = ingredientAmounts;
     }
 
 }

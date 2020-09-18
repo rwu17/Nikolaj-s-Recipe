@@ -5,13 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-//import javax.swing.text.html.ImageView;
-//import java.awt.*;
+//import javax.swing.text.html.recipeImage;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -19,9 +21,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.effect.Blend;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -39,6 +43,8 @@ public class MainMenuController {
     @FXML Button recipeCreate;
     @FXML Button toMainMenu;
     @FXML Button createButton;
+    @FXML Button imageButton;
+    @FXML ImageView recipeImage;
     @FXML TextField recipeNameTextField;
     @FXML Button addItemButton;
     @FXML Button removeItemButton;
@@ -51,6 +57,7 @@ public class MainMenuController {
 
     private TableManager<Ingredient> itemsManager;
 
+    ArrayList<Object> Recipes = new ArrayList<>();
 
     @FXML
     private void initialize(){
@@ -93,24 +100,6 @@ public class MainMenuController {
 
 
     }
-    /*
-    public void blendImage(){
-        Blend blend = new Blend();
-        blend.setMode(BlendMode.COLOR_BURN);
-        ColorInput blendColorInput = new ColorInput();
-        blendColorInput.setPaint(Color.STEELBLUE);
-        blendColorInput.setX(0);
-        blendColorInput.setY(0);
-        blendColorInput.setWidth(95);
-        blendColorInput.setHeight(110);
-        blend.setTopInput(blendColorInput);
-        recipeNew.setEffect(blend);
-    }
-
-    public void removeEffect(){
-        recipeNew.setEffect(null);
-    }
-    */
 
     public void backToMain(){
         boolean confirmed = Main.gui.showYesNoDialog("Nikolaj's Recipe",
@@ -135,9 +124,37 @@ public class MainMenuController {
                     "Are you sure you want to create the recipe?");
 
             if (confirmed){
-                //Recipe recipe = new Recipe();
 
-                File recipesList = Recipe.createRecipeList();
+                ArrayList<String> ingredientNames = new ArrayList<>();
+
+                ArrayList<String> ingredientAmounts = new ArrayList<>();
+
+                Recipe recipe = new Recipe(recipeNameTextField.getText(), recipeImage.getImage(), ingredientNames, ingredientAmounts);
+
+                for (Object row: ingredientTable.getItems()) {
+                    for (TableColumn column : ingredientTable.getColumns()) {
+                        if (column.equals(ingredients)){
+                            ingredientNames.add(column.getCellObservableValue(row).getValue().toString());
+
+                        } else if (column.equals(amount)){
+                            ingredientAmounts.add(column.getCellObservableValue(row).getValue().toString());
+
+                        }
+                        
+                    }
+
+                }
+
+                try {
+                    //PrintWriter pw = new PrintWriter(new File());
+
+
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
 
                 BufferedWriter bw = null;
 
@@ -147,39 +164,10 @@ public class MainMenuController {
                 } catch (IOException e){
                     e.printStackTrace();
                 }
-                try{
-                    bw = new BufferedWriter(new FileWriter(recipesList, true));
-                } catch (IOException e){
-                    System.out.println("bw = new bufferedwriter error");
-                    e.printStackTrace();
-                }
-                try {
-                    bw.append(recipeNameTextField.getText()).append("\n");
-                } catch (IOException e){
-                    System.out.println("bw.append error");
-                    e.printStackTrace();
-                }
 
-                ArrayList<String> recipes = new ArrayList<>();
-
-                try (BufferedReader br = new BufferedReader(new FileReader(recipesList))) {
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        recipes.add(line);
-                    }
-                    System.out.print(recipes);
-                    System.out.println("\n---------------------\n");
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
                 System.out.println("\n---------------------\n");
-                try {
-                    bw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
             }
         }
     }
@@ -215,19 +203,44 @@ public class MainMenuController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose a picture");
 
-        //final DirectoryChooser directoryChooser = new DirectoryChooser();
-
         Stage stage = (Stage) MenuID.getScene().getWindow();
 
-        fileChooser.showOpenDialog(stage);
+        File selectedFile = fileChooser.showOpenDialog(stage);
 
-        //File selectedFile = directoryChooser.showDialog(stage);
-        /*
         if (selectedFile != null){
+            Image image = new Image(selectedFile.toURI().toString());
+
+            recipeImage.setImage(image);
 
         }
-        */
     }
+
+    /*
+    public void centerImage() {
+        Image img = recipeImage.getImage();
+        if (img != null) {
+            double w = 0;
+            double h = 0;
+
+            double ratioX = recipeImage.getFitWidth() / img.getWidth();
+            double ratioY = recipeImage.getFitHeight() / img.getHeight();
+
+            double reducCoeff = 0;
+            if(ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = img.getWidth() * reducCoeff;
+            h = img.getHeight() * reducCoeff;
+
+            recipeImage.setX((recipeImage.getFitWidth() - w) / 2);
+            recipeImage.setY((recipeImage.getFitHeight() - h) / 2);
+
+        }
+    }
+     */
 
     public void addItem(){
 
@@ -247,7 +260,33 @@ public class MainMenuController {
             ingredientNameTextField.clear();
             ingredientAmountTextField.clear();
 
-            System.out.println("Name: " + ingredientName + " Amount: " + ingredientAmount);
+            //System.out.println("Name: " + ingredientName + " Amount: " + ingredientAmount);
+
+
+            // test for tableview
+            /*
+            ArrayList<String> ingredientNames = new ArrayList<>();
+
+            ArrayList<String> ingredientAmounts = new ArrayList<>();
+
+                for (Object row: ingredientTable.getItems()) {
+                    for (TableColumn column : ingredientTable.getColumns()) {
+                        if (column.equals(ingredients)){
+                            ingredientNames.add(column.getCellObservableValue(row).getValue().toString());
+
+                        } else if (column.equals(amount)){
+                            ingredientAmounts.add(column.getCellObservableValue(row).getValue().toString());
+
+                        }
+
+                    }
+
+                }
+                System.out.println(ingredientNames);
+
+                System.out.println(ingredientAmounts);
+             */
+
 
         } else if(((ingredientNameTextField.getText().isEmpty()) || (ingredientAmountTextField.getText().isEmpty()))){
             GUI.warningDialog("Nikolaj's Recipe",

@@ -45,11 +45,6 @@ public class Main extends Application {
         */
         gui.changeView("MainMenu");
 
-
-        File recipesList = Recipe.createRecipeList();
-        ArrayList<String> recipes = new ArrayList<>();
-        Recipe.loadRecipeList(recipesList, recipes);
-
         primaryStage.show();
     }
 }
